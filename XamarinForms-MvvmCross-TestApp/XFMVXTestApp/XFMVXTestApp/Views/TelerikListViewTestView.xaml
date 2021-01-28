@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<views:MvxContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+    mc:Ignorable="d"
+    x:Class="XFMVXTestApp.XF.Views.TelerikListViewTestView"
+xmlns:telerikDataControls="clr-namespace:Telerik.XamarinForms.DataControls;assembly=Telerik.XamarinForms.DataControls"
+xmlns:telerikListView="clr-namespace:Telerik.XamarinForms.DataControls.ListView;assembly=Telerik.XamarinForms.DataControls"
+    x:Name="RootLayout"
+xmlns:telerikInput="clr-namespace:Telerik.XamarinForms.Input;assembly=Telerik.XamarinForms.Input"
+xmlns:telerikPrimitives="clr-namespace:Telerik.XamarinForms.Primitives;assembly=Telerik.XamarinForms.Primitives"
+xmlns:telerikGrid="clr-namespace:Telerik.XamarinForms.DataGrid;assembly=Telerik.XamarinForms.DataGrid">
+    <views:MvxContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="TestListViewItemTemplate">
+                <ViewCell>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="TestListViewItemTemplate_Tapped" />
+                        </Grid.GestureRecognizers>
+                        <Label Grid.Column="0"
+                               HeightRequest="{Binding Height}"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Center"
+                               VerticalTextAlignment="Center"
+                               FontSize="{OnPlatform iOS=20, Android=16}"
+                               Text="{Binding SequenceNumber}"
+                               TextColor="Black"
+                               Margin="20,10"/>
+
+                        <Label Grid.Column="1"
+                               Text="{Binding CreatedTime}"
+                               VerticalTextAlignment="Center"
+                               Margin="20,10"/>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ResourceDictionary>
+    </views:MvxContentPage.Resources>
+
+    <Grid BackgroundColor="DarkGray" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40">
+        
+            </RowDefinition>
+                        <RowDefinition Height="*">
+            </RowDefinition>
+        </Grid.RowDefinitions>
+                             <Grid.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="TappedHander"
+                                Tapped="TestListViewItemTemplate_Tapped" />
+                        </Grid.GestureRecognizers>
+        <Label Text="Telerik ListView Test"
+               Margin="0,6,0,0"
+               Grid.Row="0"
+               
+               FontAttributes="Bold"
+               FontSize="{OnIdiom Tablet=30, Phone=24}"
+               HorizontalTextAlignment="Center"/>
+
+        <!--<telerikDataControls:RadListView x:Name="TestListView"
+                                         SelectionMode="None"
+                                         BackgroundColor="White"
+                                                NativeControlLoaded="TestListView_NativeControlLoaded"
+                                         ItemsSource="{Binding TestItemsCollection}">
+            <telerikDataControls:RadListView.LayoutDefinition>
+                <telerikListView:ListViewLinearLayout ItemLength="100" />
+            </telerikDataControls:RadListView.LayoutDefinition>
+            <telerikDataControls:RadListView.ItemStyle>
+                <telerikListView:ListViewItemStyle BorderWidth="2"
+                                                   BorderColor="#D9D9D9"
+                                                   BorderLocation="Bottom" />
+            </telerikDataControls:RadListView.ItemStyle>
+            <telerikDataControls:RadListView.ItemTemplate>
+                <DataTemplate>
+                    <telerikListView:ListViewTemplateCell>
+                        <telerikListView:ListViewTemplateCell.View>
+                            <Grid Padding="20,10"
+                                  RowSpacing="5">
+                                <Label FontSize="20"
+                                       FontAttributes="Bold"
+                                       TextColor="Black"
+                                       Text="{Binding SequenceNumber}" />
+                                <Label HorizontalOptions="End"
+                                       VerticalOptions="Start"
+                                       FontSize="12"
+                                    TextColor="#727272"
+                                       Text="{Binding CreatedTime, StringFormat='{}{0:g}'}" />
+                            </Grid>
+                        </telerikListView:ListViewTemplateCell.View>
+                    </telerikListView:ListViewTemplateCell>
+                </DataTemplate>
+            </telerikDataControls:RadListView.ItemTemplate>
+        </telerikDataControls:RadListView>-->
+
+        <telerikGrid:RadDataGrid x:Name="dataGrid"
+                                 ItemsSource="{Binding TestItemsCollection, Source={x:Reference RootLayout}}"
+                                 Grid.Row="1"
+                                 VerticalOptions="FillAndExpand"
+                                 AutoGenerateColumns="False" >
+            <telerikGrid:RadDataGrid.Columns>
+            <telerikGrid:DataGridTextColumn PropertyName="SequenceNumber" HeaderText="Seq" SizeMode="Fixed" />
+            <telerikGrid:DataGridTextColumn PropertyName="CreatedTime" SizeMode="Auto"/>
+        </telerikGrid:RadDataGrid.Columns>
+        </telerikGrid:RadDataGrid>
+
+        <!--<telerikDataControls:RadListView 
+                  x:Name="TestListView"
+                  Margin="0"
+                  BackgroundColor="Pink"
+                  
+                  SelectionMode="None"
+                  ItemsSource="{Binding TestItemsCollection, Source={x:Reference RootLayout}}">
+
+            <telerikDataControls:RadListView.ItemTemplate>
+                <DataTemplate>
+                    <telerikListView:ListViewTemplateCell>
+                        <telerikListView:ListViewTemplateCell.View>
+                            <Grid>
+                                <Label Margin="10" Text="{Binding SequenceNumber}" />
+                            </Grid>
+                        </telerikListView:ListViewTemplateCell.View>
+                    </telerikListView:ListViewTemplateCell>
+                </DataTemplate>
+            </telerikDataControls:RadListView.ItemTemplate>
+       </telerikDataControls:RadListView>-->
+    </Grid>
+</views:MvxContentPage>
